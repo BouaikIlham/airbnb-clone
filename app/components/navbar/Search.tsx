@@ -22,22 +22,21 @@ const Search = () => {
       >
         <div
           className="text-sm
-                        font-semibold
-                        px-6"
+          font-bold px-6"
         >
-          anywhere
+          Anywhere
         </div>
         <div
           className="hidden
                         sm:block
-                        font-semibold
+                        font-bold
                         px-6
                         text-sm
                         text-center
                         border-x-[1px]
                         flex-1"
         >
-          anytime
+          Anyweek
         </div>
         <div
           className="text-sm
@@ -49,7 +48,7 @@ const Search = () => {
                         items-center
                         gap-3"
         ></div>
-        <div className="hidden sm:block">Add Guests</div>
+        <div className="hidden sm:block ">Add Guests</div>
         <div
           className="p-2
             ml-5
