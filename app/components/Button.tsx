@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
     return ( 
         <button 
-        onClick={() =>{}}
+        onClick={onClick}
         disabled={disabled}
         className={`relative 
                             disabled:opacity-70
