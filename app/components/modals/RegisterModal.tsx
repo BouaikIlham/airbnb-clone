@@ -45,7 +45,14 @@ const RegisterModal = () => {
         subtitle="Create an account"
         center={false}
       />
-      <Input />
+      <Input
+        id="email"
+        label="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
     </div>
   )
   return (
