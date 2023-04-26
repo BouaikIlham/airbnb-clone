@@ -4,6 +4,7 @@ import axios from "axios";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
+import { toast } from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
@@ -33,7 +34,7 @@ const RegisterModal = () => {
         registerModal.onClose();
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("This didn't work.")
       })
       .finally(() => {
         setIsLoading(false);
