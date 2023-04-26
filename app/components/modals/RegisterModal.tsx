@@ -2,6 +2,8 @@
 
 import axios from "axios";
 import Modal from "./Modal";
+import Heading from "../Heading";
+import Input from "../inputs/Input";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
@@ -35,6 +37,17 @@ const RegisterModal = () => {
         setIsLoading(false);
       });
   };
+
+  const bodyContent = (
+    <div className="flex flex-col gap-4">
+      <Heading
+        title="Welcome to Airbnb"
+        subtitle="Create an account"
+        center={false}
+      />
+      <Input />
+    </div>
+  )
   return (
     <Modal 
         disabled= {isLoading}
@@ -43,6 +56,7 @@ const RegisterModal = () => {
         actionLabel="Continue"
         onClose={registerModal.onClose}
         onSubmit={handleSubmit(OnSubmit)}
+        body={bodyContent}
 
     />
   )
