@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ( {
             <input 
                 id={id}
                 disabled={disabled}
-                {... register(id, {required})}
+                { ... register(id, {required})}
                 placeholder=""
                 type={type}
                 className={`
@@ -60,7 +60,7 @@ const Input: React.FC<InputProps> = ( {
             />
             <label className={`
                 absolute
-                text-md
+                text-lg
                 duration-150
                 transform
                 -translate-y-3

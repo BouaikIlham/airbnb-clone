@@ -15,7 +15,9 @@ const RegisterModal = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {
+      errors,
+    },
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
@@ -23,7 +25,7 @@ const RegisterModal = () => {
       password: "",
     },
   });
-  const OnSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     axios
       .post("/api/register", data)
@@ -38,6 +40,8 @@ const RegisterModal = () => {
       });
   };
 
+
+
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
@@ -46,8 +50,25 @@ const RegisterModal = () => {
         center={false}
       />
       <Input
+        id="name"
+        label="Name"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
         id="email"
         label="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="password"
+        type="password"
+        label="Password"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -62,7 +83,7 @@ const RegisterModal = () => {
         title="Register"
         actionLabel="Continue"
         onClose={registerModal.onClose}
-        onSubmit={handleSubmit(OnSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
         body={bodyContent}
 
     />

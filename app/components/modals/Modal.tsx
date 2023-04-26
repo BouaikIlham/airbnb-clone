@@ -43,15 +43,16 @@ const Modal: React.FC<ModalProps> = ({
     setTimeout(() => {
       onClose();
     }, 300);
-  }, [disabled, onClose]);
+  }, [onClose, disabled]);
 
   const handleSubmit = useCallback(() => {
+
     if (disabled) {
       return;
     }
 
     onSubmit();
-  }, [disabled, onSubmit]);
+  }, [onSubmit, disabled ]);
 
   const handleSecondaryAction = useCallback(() => {
     if (disabled || !secondaryAction) {
@@ -59,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
     }
 
     secondaryAction();
-  }, [disabled, secondaryAction]);
+  }, [secondaryAction, disabled ]);
 
   if (!isOpen) {
     return null;
@@ -150,10 +151,10 @@ const Modal: React.FC<ModalProps> = ({
                 <div className="flex flex-row items-center gap-4 w-full">
                   {secondaryAction && secondaryActionLabel &&  (
                      <Button 
-                     outline
-                     disabled={disabled}
-                     label={secondaryActionLabel}
-                     onClick={handleSecondaryAction}
+                      outline
+                      disabled={disabled}
+                      label={secondaryActionLabel}
+                      onClick={handleSecondaryAction}
                    />
                   )}
                      <Button 
