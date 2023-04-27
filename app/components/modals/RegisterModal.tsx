@@ -6,7 +6,7 @@ import Heading from "../Heading";
 import Input from "../inputs/Input";
 import Button from "../Button";
 import { toast } from "react-hot-toast";
-import { AiFillFacebook } from "react-icons/ai";
+import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -91,8 +91,8 @@ const RegisterModal = () => {
       />
       <Button
         outline
-        label="Contine with Facebook"
-        icon={AiFillFacebook}
+        label="Contine with Github"
+        icon={AiFillGithub}
         onClick={() => {}}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
