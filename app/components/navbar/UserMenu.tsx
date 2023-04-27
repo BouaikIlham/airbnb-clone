@@ -10,6 +10,7 @@ import MenuItem from "./MenuItem";
 import { AiOutlineMenu } from "react-icons/ai";
 import useRegisterModal from "@/app/hooks/UseRegisterModals";
 import useLoginModal from "@/app/hooks/UseLoginModals";
+import {signOut} from 'next-auth/react'
 const UserMenu : React.FC<UserMenuProps>= ({
   currentUser
 }) => {
@@ -76,14 +77,14 @@ const UserMenu : React.FC<UserMenuProps>= ({
                   />
                   <hr />
                   <MenuItem
-                      onClick={() => {}}
+                      onClick={() => {signOut()}}
                       label="Logout"
                   />
                 </>
               ) : (
                 <>
                   <MenuItem
-                      onClick={() => {}}
+                      onClick={loginModal}
                       label="Login"
 
                   />
