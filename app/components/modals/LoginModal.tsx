@@ -1,6 +1,5 @@
 "use client";
-
-import axios from "axios";
+import {signIn} from 'next-auth/react'
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
@@ -12,8 +11,11 @@ import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import useRegisterModal from "@/app/hooks/UseRegisterModals";
 import useLoginModal from "@/app/hooks/UseLoginModals";
+import { useRouter } from 'next/navigation';
+
 const LoginModal = () => {
   const registerModal = useRegisterModal();
+  const router = useRouter()
   const loginModal = useLoginModal()
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -28,17 +30,23 @@ const LoginModal = () => {
   });
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    axios
-      .post("/api/register", data)
-      .then(() => {
-        registerModal.onClose();
-      })
-      .catch((error) => {
-        toast.error("This didn't work.");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    signIn('credentials', {
+      ...data,
+      redirect: false,
+    })
+    .then((callback) => {
+      setIsLoading(false);
+
+      if(callback?.ok) {
+        toast.success('Logged in');
+        router.refresh();
+        loginModal.onClose()
+      }
+
+      if(callback?.error) {
+        toast.error(callback.error);
+      }
+    })
   };
 
   const bodyContent = (
