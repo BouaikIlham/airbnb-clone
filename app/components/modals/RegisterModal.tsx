@@ -1,5 +1,4 @@
 "use client";
-
 import axios from "axios";
 import Modal from "./Modal";
 import Heading from "../Heading";
@@ -11,9 +10,11 @@ import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import useRegisterModal from "@/app/hooks/UseRegisterModals";
+import useLoginModal from "@/app/hooks/UseLoginModals";
 import { signIn } from "next-auth/react";
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -40,7 +41,10 @@ const RegisterModal = () => {
         setIsLoading(false);
       });
   };
-
+  const toggle = useCallback(() => {
+    loginModal.onOpen();
+    registerModal.onClose()
+  }, [loginModal, registerModal])
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
@@ -102,7 +106,7 @@ const RegisterModal = () => {
             Aleardy have an account
           </div>
           <div className="text-neutral-900 font-bold  cursor-pointer hover:underline"
-               onClick={registerModal.onClose}>
+               onClick={toggle}>
             Log in
           </div>
         </div>
