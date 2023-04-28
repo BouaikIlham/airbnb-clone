@@ -11,12 +11,13 @@ interface CategoryInputProps {
 const CategoryInput: React.FC<CategoryInputProps> = ({
     label,
     icon: Icon,
-    onClick,
-    selected
+    selected,
+    onClick
+
 
 }) => {
     return ( 
-        <div onClick={() => {label}}
+        <div onClick={() => onClick(label)}
              className={`
                 rounded-xl
                 border-2
