@@ -11,6 +11,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import Counter from "../inputs/Counter";
 import ImageUpload from "../inputs/ImageUpload";
+import Input from "../inputs/Input";
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
@@ -24,6 +25,7 @@ const RentModal = () => {
   const rentModal = UseRentalModal();
 
   const [step, setStep] = useState(STEPS.CATEGORY);
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -165,6 +167,35 @@ const RentModal = () => {
         <ImageUpload
           value={imageSrc}
           onChange={(value) =>setCustomValue('imageSrc', value)}
+          />
+      </div>
+    )
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+           title="How would you describe your place?"
+           subtitle="Short and sweet works best!"
+         />
+         <Input
+            id="title"
+            label='Title'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+          <hr />
+
+          <Input
+            id="description"
+            label='Description'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
           />
       </div>
     )
