@@ -1,4 +1,6 @@
-'use client'
+'use client';
+
+
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import  {useCallback} from 'react'
@@ -23,12 +25,12 @@ const ImageUpload: React.FC<ImageUpload> = ({
     return ( 
         <CldUploadWidget
             onUpload={handleUpload}
-            uploadPreset="q8wtmswf"
+            uploadPreset="gsrkkkks"
             options={{
                 maxFiles: 1
             }}
         >
-            {({open}) => {
+            {({ open }) => {
                 return (
                     <div
                         onClick={() => open?.()}
