@@ -1,12 +1,12 @@
 "use client";
-import { eachDayOfInterval } from "date-fns";
+import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";
 import useLoginModal from "@/app/hooks/UseLoginModals";
 import ListingInfo from "@/app/components/listings/ListingInfo";
 import { Reservation } from "@prisma/client";
 import { SafeListing, SafeUser } from "@/app/types";
 import { categories } from "@/app/components/navbar/Categories";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Container from "@/app/components/Container";
 import ListingHead from "@/app/components/listings/ListingHead";
 import axios from "axios";
@@ -44,47 +44,55 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
       dates = [...dates, ...range];
     });
-    return dates
+    return dates;
   }, [reservations]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(listing.price)
-  const [dateRange, setDateRange] = useState(initialDateRange)
+  const [totalPrice, setTotalPrice] = useState(listing.price);
+  const [dateRange, setDateRange] = useState(initialDateRange);
 
   const onCreateReservation = useCallback(() => {
-    if(!currentUser) {
+    if (!currentUser) {
       return loginModal.onOpen();
     }
 
     setIsLoading(true);
-    axios.post('/api/reservation', {
-      totalPrice,
-      startDate: dateRange.startDate,
-      endDate: dateRange.endDate,
-      listingId: listing?.id
-    })
-    .then(() => {
-      toast.success('Listing reserved');
-      setDateRange(initialDateRange);
-      // Redirect to :trips
-      router.refresh();
-    })
-    .catch(() => {
-      toast.error('Something went wrong')
-    })
-    .finally(() => {
-      setIsLoading(false)
-    })
-  }, [
-      totalPrice,
-      listing?.id,
-      currentUser,
-      dateRange,
-      router,
-      loginModal
-    ])
+    axios
+      .post("/api/reservation", {
+        totalPrice,
+        startDate: dateRange.startDate,
+        endDate: dateRange.endDate,
+        listingId: listing?.id,
+      })
+      .then(() => {
+        toast.success("Listing reserved");
+        setDateRange(initialDateRange);
+        // Redirect to :trips
+        router.refresh();
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [totalPrice, listing?.id, currentUser, dateRange, router, loginModal]);
+
+  useEffect(() => {
+    if (dateRange.startDate && dateRange.endDate) {
+      const dayCount = differenceInCalendarDays(
+        dateRange.endDate,
+        dateRange.startDate
+      )
+      if (dayCount && listing.price) {
+        setTotalPrice(dayCount * listing.price)
+      } else {
+        setTotalPrice(listing.price)
+      }
+    }
 
 
+  }, [dateRange, listing.price])
   const category = useMemo(() => {
     return categories.find((item) => item.label === listing.category);
   }, [listing.category]);
