@@ -1,4 +1,5 @@
 'use client'
+import Button from '../Button';
 import Calendar from '../inputs/Calendar';
 import { Range } from 'react-date-range'
 
@@ -37,6 +38,19 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
                 disabledDates={disabledDates}
                 onChange={(value) => onChangeDate(value.selection)}
             />
+            <hr />
+            <div className="p-4">
+                <Button
+                    disabled={disabled}
+                    label="Reserve"
+                    onClick={onSubmit}
+                />
+
+            </div>
+            <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
+                <div>Total</div>
+                <div>$ {totalPrice}</div>
+            </div>
         </div>
      );
 }
