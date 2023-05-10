@@ -63,7 +63,6 @@ const TripsClient: React.FC<TripsClientProps> = ({
 
                 />
             ))}
-
             </div>
         </Container>
      );
