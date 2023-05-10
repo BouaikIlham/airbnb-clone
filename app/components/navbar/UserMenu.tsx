@@ -12,6 +12,7 @@ import useRegisterModal from "@/app/hooks/UseRegisterModals";
 import useLoginModal from "@/app/hooks/UseLoginModals";
 import {signOut} from 'next-auth/react'
 import UseRentalModal from '@/app/hooks/useRentModal';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -26,6 +27,7 @@ const UserMenu : React.FC<UserMenuProps>= ({
     setIsOpen((value) => !value);
 
   }, []);
+  const router = useRouter()
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
   const rentModal = UseRentalModal()
@@ -69,7 +71,7 @@ const UserMenu : React.FC<UserMenuProps>= ({
               {currentUser ? (
                 <>
                   <MenuItem
-                      onClick={() => {}}
+                      onClick={() => router.push("/trips")}
                       label="My trips"
 
                   />
