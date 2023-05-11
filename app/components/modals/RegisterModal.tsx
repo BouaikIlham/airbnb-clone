@@ -33,6 +33,7 @@ const RegisterModal = () => {
       .post("/api/register", data)
       .then(() => {
         registerModal.onClose();
+        loginModal.onOpen();
       })
       .catch((error) => {
         toast.error("This didn't work.");
