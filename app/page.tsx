@@ -47,4 +47,6 @@ interface HomeProps {
     </ClientOnly>
   )
 }
+
+export const dynamic = 'force-dynamic'
 export default Home;
