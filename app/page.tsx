@@ -18,6 +18,7 @@ interface HomeProps {
       </ClientOnly>
     )
   }
+
   return (
     <ClientOnly>
       <Container>
